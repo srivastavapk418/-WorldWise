@@ -1,4 +1,4 @@
-<img width="1920" height="867" alt="Screenshot (93)" src="https://github.com/user-attachments/assets/c92a26e2-ccb1-4206-b5a9-c069c3928fe9" /># 🌍 WorldWise — Travel Places & Notes
+# 🌍 WorldWise — Travel Places & Notes
 
 **WorldWise** is a lightweight React app for saving visited cities/countries and adding notes about each visit with LogIn/LogOut feature. It’s built with React and uses a simple JSON dataset for data. The app supports both local development via `json-server` and production deployment on Vercel using `serverless API routes`.
 
