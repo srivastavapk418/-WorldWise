@@ -2,19 +2,18 @@
 import fs from "fs";
 import path from "path";
 
-export default async function handler(req, res) {
+export default function handler(req, res) {
   try {
-    // Create absolute path to your data file
     const filePath = path.join(process.cwd(), "data", "cities.json");
-
-    // Read and parse file contents
     const fileContents = fs.readFileSync(filePath, "utf-8");
-    const cities = JSON.parse(fileContents);
+    const jsonData = JSON.parse(fileContents);
 
-    // Return data
+    // Your cities are stored inside jsonData.cities
+    const cities = jsonData.cities || [];
+
     res.status(200).json(cities);
-  } catch (err) {
-    console.error("Error loading cities:", err);
+  } catch (error) {
+    console.error("Error reading cities.json:", error);
     res.status(500).json({ error: "Failed to load cities data." });
   }
 }
