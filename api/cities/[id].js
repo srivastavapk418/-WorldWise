@@ -1,16 +1,23 @@
 // api/cities/[id].js
-import citiesData from "../../data/cities.json";
+import fs from "fs";
+import path from "path";
 
-export default function handler(req, res) {
-  const { id } = req.query; // Vercel provides route param as string
-  const cities = Array.isArray(citiesData) ? citiesData : citiesData.cities || [];
+export default async function handler(req, res) {
+  try {
+    const { id } = req.query;
 
-  // Accept numeric or string id (match however your city id is stored)
-  const city = cities.find((c) => String(c.id) === String(id));
+    const filePath = path.join(process.cwd(), "data", "cities.json");
+    const fileContents = fs.readFileSync(filePath, "utf-8");
+    const cities = JSON.parse(fileContents);
 
-  if (!city) {
-    return res.status(404).json({ message: "City not found" });
+    const city = cities.find((c) => String(c.id) === String(id));
+    if (!city) {
+      return res.status(404).json({ error: "City not found." });
+    }
+
+    res.status(200).json(city);
+  } catch (err) {
+    console.error("Error loading city:", err);
+    res.status(500).json({ error: "Failed to load city data." });
   }
-
-  res.status(200).json(city);
 }

@@ -6,9 +6,9 @@ import {
   useReducer,
 } from "react";
 
-const BASE_URL = "/api";
-// const BASE_URL =
-//   process.env.NODE_ENV === "production" ? "/api" : "http://localhost:8000";
+// const BASE_URL = "/api";
+const BASE_URL =
+  process.env.NODE_ENV === "production" ? "/api" : "http://localhost:8000";
 
 const CitiesContext = createContext();
 
